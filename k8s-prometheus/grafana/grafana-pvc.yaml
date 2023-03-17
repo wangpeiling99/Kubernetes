@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data
+  namespace: kube-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      pv: grafa
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0002
+  namespace: kube-system
+  labels:
+    pv: grafa
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /data/nfs/
+    server: 192.168.10.110
+
